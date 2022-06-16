@@ -3,7 +3,6 @@ from dataclasses import dataclass
 
 @dataclass
 class Memory:
-
     def has_space_for(pages):
         # check if has space for new pages
         pass

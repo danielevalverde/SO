@@ -1,3 +1,4 @@
+from memory import Memory
 from process import Process
 import fifo
 from processor import Processor
@@ -36,4 +37,11 @@ print('\n')
 
 # fifo.run(n, list)
 # rr.run(n, list)
-rr.run(n, list)
+processes = sjf(list)
+print(processes)
+
+processor = Processor()
+memory = Memory()
+
+for process in processes:
+    processor.run_process(process, memory)
