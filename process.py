@@ -3,21 +3,21 @@ from dataclasses import dataclass
 
 @dataclass
 class Process:
-  def __init__(self, tc = 0, te = 0, d = 0, p = 0, q = 0, s = 0, wt = 0, ta = 0 ): 
-    self.tc = tc
-    self.te = te 
-    self.d = d
-    self.p = p
-    self.q = q
-    self.s = s
-    self.wt = wt
-    self.ta = ta
-          
+    def __init__(self, char='*', tempo_chegada=0, tempo_execucao=0, deadline=0, quantun=0, sobrecarga=0, pagina=0, tempo_espera=0, turnaround =0, tempo_restante=0):
+        self.char = char
+        self.tempo_chegada = tempo_chegada
+        self.tempo_execucao = tempo_execucao
+        self.deadline = deadline
+        self.quantun = quantun
+        self.sobrecarga = sobrecarga
+        self.pagina = pagina
+        self.tempo_espera = tempo_espera
+        self.turnaround = turnaround
+        self.tempo_restante = tempo_restante
 
 # o Tempo de chegada
 # o Tempo de execução
 # o Deadline
-# o Prioridade
 # o Quantum do sistema
 # o Sobrecarga do sistema
 # wt = waiting time
