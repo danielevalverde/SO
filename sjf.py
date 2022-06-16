@@ -6,7 +6,7 @@ def sjf(list: list[Process]):
     sjfdict, tempdict, sortdict = {}, {}, {}, []
 
     for key, process in enumerate(list):
-        tempo_chegada, tempo_execucao = process.tc, process.te
+        tempo_chegada, tempo_execucao = process.tempo_chegada, process.tempo_execucao
         if (acc_inicio == 0):
             acc_execucao += tempo_execucao
             sjfdict[process.char] = process
@@ -15,10 +15,10 @@ def sjf(list: list[Process]):
             tempdict[process.char] = process
 
     for key, process in sorted(tempdict.items(), key=lambda x: x[1][1]):
-        sortdict[key] = process.tc, process.te
+        sortdict[key] = process.tempo_chegada, process.tempo_execucao
 
     for key, process in sortdict.items():
-        tempo_chegada, tempo_execucao = process.tc, process.te
+        tempo_chegada, tempo_execucao = process.tempo_chegada, process.tempo_execucao
         if(acc_inicio-tempo_chegada > 0):
             acc_execucao += tempo_execucao
             sjfdict[key] = [acc_inicio-tempo_chegada,
