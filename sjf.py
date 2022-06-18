@@ -1,16 +1,15 @@
 from process import Process
 
 
-def sjf(list: list[Process]):
+def sjf(plist: list[Process]):
     acc_inicio, acc_execucao = 0, 0
     sjfdict, tempdict, sortdict = {}, {}, {}
 
-    for process in list:
-        tempo_chegada, tempo_execucao = process.tempo_chegada, process.tempo_execucao
+    for process in plist:
         if (acc_inicio == 0):
-            acc_execucao += tempo_execucao
+            acc_execucao += process.tempo_execucao
             sjfdict[process.char] = process
-            acc_inicio = tempo_execucao
+            acc_inicio = process.tempo_execucao
         else:
             tempdict[process.char] = process
 
@@ -18,16 +17,16 @@ def sjf(list: list[Process]):
         sortdict[key] = process
 
     for key, process in sortdict.items():
-        tempo_chegada, tempo_execucao = process.tempo_chegada, process.tempo_execucao
-        if(acc_inicio-tempo_chegada > 0):
-            acc_execucao += tempo_execucao
-            process
-            sjfdict[key] = [acc_inicio-tempo_chegada,
-                            acc_execucao-tempo_chegada]
-            acc_inicio += tempo_execucao
-        else:
-            acc_execucao += tempo_execucao
-            sjfdict[key] = [0, tempo_execucao]
-            acc_inicio += tempo_execucao
+        acc_execucao += process.tempo_execucao
 
-    return sjfdict.values()
+        if (acc_inicio-process.tempo_chegada > 0):
+            process.tempo_espera = acc_inicio  # -process.tempo_chegada
+            process.turnaround = acc_execucao-process.tempo_chegada
+        else:
+            process.tempo_espera = 0
+            process.turnaround = process.tempo_execucao
+
+        sjfdict[key] = process
+        acc_inicio += process.tempo_execucao
+
+    return list(sjfdict.values())
