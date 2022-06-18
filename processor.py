@@ -13,14 +13,14 @@ class Processor:
         default=MemoryManagementUnit(), init=False)
     # overload: int
 
-    def run_process(self, process: Process, memory: Memory):
-        # tentar page-in #
-        if (memory.has_space_for(process.pagina)):
-            # page
-            pass
-        else:
-            memory.disk_alloc(process)
-            # adicionar
+    def run_process(self, process: Process):
+        # # tentar page-in #
+        # if (memory.has_space_for(process.pagina)):
+        #     # page
+        #     pass
+        # else:
+        #     memory.disk_alloc(process)
+        #     # adicionar
 
         # print process line
         print('|-|'*process.tempo_espera, end='')

@@ -37,10 +37,7 @@ list.sort(key=lambda x: x.tempo_chegada)
 
 # fifo.run(n, list)
 # rr.run(n, list)
-processes = sjf(list)
-
-processor = Processor(delay=1)
+processor = Processor(delay=0.5)
 memory = Memory()
 
-for process in processes:
-    processor.run_process(process, memory)
+processes = sjf(list, processor)
