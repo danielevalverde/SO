@@ -22,3 +22,4 @@ class Process:
 # o Sobrecarga do sistema
 # wt = waiting time
 # ta = turning around
+

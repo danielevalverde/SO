@@ -58,4 +58,3 @@ def run(n, list):
     print("Average turn around time = " + str(turnaround / n))
 
     # print(tempo_espera)
-    # print(ta)

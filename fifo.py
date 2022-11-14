@@ -1,31 +1,33 @@
+from time import sleep
 from process import Process
 
 list_of_process = []
 
 def run(n, list):
-	wt = 0
-	ta = 0
+	tempo_espera = 0
+	turnaround = 0
 	for i in range(0, n ):
-		list[i].wt = int(wt)
-		list[i].ta=  int(list[i].te) + ta
-		wt = int(list[i].te) + int(wt)
-		ta = ta + int(list[i].te)
+		list[i].tempo_espera = int(tempo_espera)
+		list[i].turnaround=  int(list[i].tempo_execucao) + turnaround
+		tempo_espera = int(list[i].tempo_execucao) + int(tempo_espera)
+		turnaround = turnaround + int(list[i].tempo_execucao)
 
-	wt = wt - int(list[n-1].te)
+	tempo_espera = tempo_espera - int(list[n-1].tempo_execucao)
 	# print('---------------------------')
 		
 	print( "Processes Burst time " +
 			" Waiting time " +
+			" Char " +
 			" Turn around time")
 
 	for i in range(0, n ):
+		sleep(1)
 		print(" " + str(i + 1) + "\t\t" +
-		str(list[i].te) + "\t " +
-		str(list[i].wt) + "\t\t " +
-		str(list[i].ta) + "\t\t " )
+		str(list[i].tempo_execucao) + "\t " +
+		str(list[i].tempo_espera) + "\t\t " +
+		str(list[i].char) + "\t\t " +
+		str(list[i].turnaround) + "\t\t " )
+		
 
-	print( "Average waiting time = "+ str(wt / n))
-	print("Average turn around time = "+  str(ta / n))
-
-	# print(wt)
-	# print(ta)
+	print( "Average waiting time = "+ str(tempo_espera / n))
+	print("Average turn around time = "+  str(turnaround / n))

@@ -3,7 +3,7 @@ from process import Process
 import fifo
 from processor import Processor
 import rr
-from sjf import sjf
+# from sjf import sjf
 
 n = int(input())
 
@@ -27,17 +27,11 @@ for i in range(n):
 
 list.sort(key=lambda x: x.tempo_chegada)
 
-# for i in range(n):
-#   print(list[i].tc)
-#   print(list[i].te)
-
 # algorithm = input()
 
-# print('\n')
-
 # fifo.run(n, list)
-# rr.run(n, list)
-processor = Processor(delay=0.5)
-memory = Memory()
+rr.run(n, list)
+# processor = Processor(delay=0.5)
+# memory = Memory()
 
-processes = sjf(list, processor)
+# processes = sjf(list, processor)
