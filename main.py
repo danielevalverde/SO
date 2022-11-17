@@ -15,7 +15,7 @@ for i in range(n):
     aux.tempo_restante = aux.tempo_execucao
     list_aux.append(aux)
 
-list = []
+plist = []
 # ordena processos por ordem de chegada
 for i in range(n):
     aux = list_aux[i]
@@ -23,14 +23,14 @@ for i in range(n):
     aux.tempo_execucao = int(list_aux[i].tempo_execucao)
     aux.quantun = int(list_aux[i].quantun)
     aux.tempo_restante = int(list_aux[i].tempo_restante)
-    list.append(aux)
+    plist.append(aux)
 
-list.sort(key=lambda x: x.tempo_chegada)
+plist.sort(key=lambda x: x.tempo_chegada)
 
 # algorithm = input()
 
 # fifo.run(n, list)
-rr.run(n, list)
+rr.run(n, plist)
 # processor = Processor(delay=0.5)
 # memory = Memory()
 

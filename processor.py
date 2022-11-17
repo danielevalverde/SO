@@ -11,6 +11,7 @@ class Processor:
     delay: int = field(default=0)
     _mmu: MemoryManagementUnit = field(
         default=MemoryManagementUnit(), init=False)
+
     # overload: int
 
     def run_process(self, process: Process):
@@ -23,7 +24,7 @@ class Processor:
         #     # adicionar
 
         # print process line
-        print('|-|'*process.tempo_espera, end='')
+        print('|-|' * process.tempo_espera, end='')
 
         count = process.tempo_restante
         while (count):
@@ -33,3 +34,12 @@ class Processor:
             count -= 1
 
         print('')
+
+    def run_processes(self, processes: list, algorithm: str):
+        match algorithm:
+            case 'fifo':
+                self.run_fifo(processes)
+            case 'sjf':
+                self.run_sjf(processes)
+            case 'rr':
+                self.run_rr(processes)
