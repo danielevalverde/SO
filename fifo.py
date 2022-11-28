@@ -1,20 +1,27 @@
 from time import sleep
 from process import Process
 # https://github.com/danielevalverde/SO/blob/main/fifo.py
-list_of_process = []
 
 def run(n, list):
 	tempo_espera = 0
 	turnaround = 0
+	start = 0
+	wt = 0
 	for i in range(0, n ):
-
 		# o processo pode nao chegar no t = 0, mas ainda ser o primero processo
-		if (tempo_espera - list[i].tempo_chegada > 0):
-			list[i].tempo_espera = tempo_espera - list[i].tempo_chegada
-		else:
-			list[i].tempo_espera = 0
 
-		list[i].turnaround =  list[i].tempo_execucao + turnaround - list[i].tempo_chegada
+		print(start, tempo_espera, list[i].tempo_chegada )
+		if (start - list[i].tempo_chegada < 0):
+			wt = 0
+			start = list[i].tempo_chegada + list[i].tempo_execucao
+			list[i].tempo_espera = wt
+		else:
+			print(f"start - list[i].tempo_chegada: {start - list[i].tempo_chegada}")
+			wt = start - list[i].tempo_chegada
+			start =  start + list[i].tempo_execucao
+			list[i].tempo_espera = wt
+		
+		list[i].turnaround =  list[i].tempo_execucao + wt
 		tempo_espera = list[i].tempo_execucao + tempo_espera - list[i].tempo_chegada
 		turnaround = turnaround + list[i].tempo_execucao
 		

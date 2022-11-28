@@ -3,23 +3,21 @@ from process import Process
 
 list_of_process = []
 
-
 def run(n, list):
     tempo_espera = 0
     turnaround = 0
     i = 0
     while(i < n):
-        list[i].tempo_espera = int(tempo_espera)
-        if(int(list[i].tempo_restante) > 0):
-            if(int(list[i].tempo_restante) >= int(list[i].quantun)):
+        list[i].tempo_espera = tempo_espera
+        if(list[i].tempo_restante > 0):
+            if(list[i].tempo_restante >= list[i].quantun):
                 # se o tempo de exec restate > quantun
-                tempo_espera = int(list[i].quantun) + int(tempo_espera)
-                list[i].tempo_restante = int(
-                    list[i].tempo_restante) - int(list[i].quantun)
-                list[i].turnaround = int(list[i].quantun) + turnaround
-                turnaround = turnaround + int(list[i].quantun)
+                tempo_espera = list[i].quantun + tempo_espera
+                list[i].tempo_restante = list[i].tempo_restante - list[i].quantun
+                list[i].turnaround = list[i].quantun + turnaround
+                turnaround = turnaround + list[i].quantun
                 # se depois de executar até o tempo do quantun, o processo ainda precisar de mais tempo pra executar, colocamos ele novamente na lista
-                if(int(list[i].tempo_restante) > 0):
+                if(list[i].tempo_restante > 0):
                     aux = Process()
                     aux.tempo_espera = list[i].tempo_espera
                     aux.tempo_execucao = list[i].tempo_execucao
@@ -33,8 +31,8 @@ def run(n, list):
                     print('|'+list[i].char + '|', end='', flush=True)
                 print('\n')
             else:
-                tempo_espera = int(list[i].tempo_restante) + int(tempo_espera)
-                turnaround = turnaround + int(list[i].tempo_restante)
+                tempo_espera = list[i].tempo_restante + tempo_espera
+                turnaround = turnaround + list[i].tempo_restante
                 list[i].turnaround = turnaround
                 print('   ' * list[i].tempo_espera, end='')
                 for j in range(0, list[i].tempo_restante):
