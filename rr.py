@@ -39,8 +39,10 @@ def run(n, list):
                     sleep(1)
                     print('|'+list[i].char + '|', end='', flush=True)
                 if (list[i].tempo_restante > 0):
+                    # add tempo de sobrecarga 
                     start +=1
                     sleep(1)
+                    # string vazia pra representar a sobrecarga
                     print('| |', end='', flush=True)
                 print('\n')
             else:
