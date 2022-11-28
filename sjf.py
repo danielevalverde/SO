@@ -1,51 +1,48 @@
+from time import sleep
 from process import Process
-from processor import Processor
+# https://github.com/danielevalverde/SO/blob/main/fifo.py
 
+def run(n, list):
+	list.sort(key=lambda x: (x.tempo_chegada, x.tempo_execucao))
+	tempo_espera = 0
+	turnaround = 0
+	start = 0
+	wt = 0
+	for i in range(0, n ):
+		# o processo pode nao chegar no t = 0, mas ainda ser o primero processo
 
-def sjf(plist: list[Process], processor: Processor):
-    n = len(plist)
-    checked = [False]*n
-    clock = 0
-    tot = 0
-    items = []
-    media_tempo_espera = 0
-    media_turnaround = 0
+		print(start, tempo_espera, list[i].tempo_chegada, list[i].tempo_execucao )
+		if (start - list[i].tempo_chegada < 0):
+			wt = 0
+			start = list[i].tempo_chegada + list[i].tempo_execucao
+			list[i].tempo_espera = wt
+		else:
+			print(f"start - list[i].tempo_chegada: {start - list[i].tempo_chegada}")
+			wt = start - list[i].tempo_chegada
+			start =  start + list[i].tempo_execucao
+			list[i].tempo_espera = wt
+		
+		list[i].turnaround =  list[i].tempo_execucao + wt
+		tempo_espera = list[i].tempo_execucao + tempo_espera - list[i].tempo_chegada
+		turnaround = turnaround + list[i].tempo_execucao
+		
+	turnaround = 0
+	for i in range(0, n ):
+		turnaround += list[i].turnaround
 
-    while (tot < n):
-        min = max(p.tempo_execucao for p in plist)+1
-        c = None
+	print( "Processes Tempo de exec " +
+			" tempo de esp" +
+			" Char " +
+			" Turn around time")
 
-        for i in range(0, n):
-            # If i'th process arrival time <= system time and its flag=0 and burst<min
-            # That process will be executed first
-            if ((plist[i].tempo_chegada <= clock) and (not checked[i]) and (plist[i].tempo_execucao < min)):
-                min = plist[i].tempo_execucao
-                c = i
+	for i in range(0, n ):
+		sleep(1)
+		print(" " + str(i + 1) + "\t\t" +
+		str(list[i].tempo_execucao) + "\t " +
+		str(list[i].tempo_espera) + "\t\t " +
+		str(list[i].char) + "\t\t " +
+		str(list[i].turnaround) + "\t\t " )
+		
 
-        # If c==n means c value can not updated because no process arrival time< system time so we increase the system time */
-        if (c == None):
-            clock += 1
-        else:
-            items.append(plist[c])
-
-            # ct[c] = clock+plist[c].tempo_execucao
-            plist[c].turnaround = (
-                clock+plist[c].tempo_execucao)-plist[c].tempo_chegada
-            plist[c].tempo_espera = clock
-
-            clock += plist[c].tempo_execucao
-            checked[c] = True
-            tot += 1
-
-    for i in range(0, n):
-        items[i].tempo_restante = items[i].tempo_execucao
-
-        processor.run_process(items[i])
-
-        media_tempo_espera += items[i].tempo_espera
-        media_turnaround += items[i].turnaround
-
-    media_tempo_espera /= n
-    media_turnaround /= n
-
-    return items
+	print( "Average waiting time = "+ str(tempo_espera / n))
+	print("Average turn around time = "+  str(turnaround / n))
