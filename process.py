@@ -14,6 +14,12 @@ class Process:
         self.tempo_espera = tempo_espera
         self.turnaround = turnaround
         self.tempo_restante = tempo_execucao
+        self.tempo_ultimo_uso = 0
+
+    def run(self):
+        # chamar classe ao executar um processo para poder fazer o page_in e guardar o estado de paginação
+        # (e possivelmente travar a execução do processo caso não tenha espaço na memória)
+        pass
 
 # o Tempo de chegada
 # o Tempo de execução
