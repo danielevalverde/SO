@@ -4,6 +4,7 @@ a 0 4 1
 b 2 3 2
 c 0 4 2
 turn = 9
+qtd processo, quantun, prioridade/deadline
 char, tempo_chegada, tempo_execucao, prioridade
 
 
@@ -14,7 +15,6 @@ c 0 3 2 2
 prioridade
 
 SJF: 
-
 
 3
 a 0 4 2

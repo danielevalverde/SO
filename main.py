@@ -24,8 +24,8 @@ for i in range(n):
         aux.char, aux.tempo_chegada, aux.tempo_execucao = input().split(' ')
     else:
         aux.char, aux.tempo_chegada, aux.tempo_execucao, aux.prioridade= input().split(' ')
+        aux.sobrecarga = sobrecarga
     aux.quantun = quantun
-    aux.sobrecarga = sobrecarga
     aux.tempo_restante = aux.tempo_execucao
     list_aux.append(aux)
 
@@ -68,13 +68,5 @@ elif(algorithm == "prioridade"):
         list.append(aux)
     prio.run(n, list)
 
-# list.sort(key=lambda x: x.tempo_chegada)
-
-# fifo.run(n, list)
-# rr.run(n, list)
-# sjf.run(n, list)
-# prio.run(n, list)
 # processor = Processor(delay=0.5)
 # memory = Memory()
-
-# processes = sjf(list, processor)
