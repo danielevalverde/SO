@@ -3,6 +3,7 @@ from process import Process
 # https://github.com/danielevalverde/SO/blob/main/fifo.py
 
 def run(n, list):
+	list.sort(key=lambda x: x.tempo_chegada)
 	tempo_espera = 0
 	turnaround = 0
 	start = 0
