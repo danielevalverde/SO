@@ -10,7 +10,6 @@ def run(n, list):
     m = n
     start_atual = 0
     while(i < n):
-    #   print(f"char, start, list[i].tempo_restante, turnaround: deadline {list[i].char, start,  list[i].tempo_restante, turnaround, list[i].deadline}")
       if(list[i].tempo_restante > 0):
           # se o tempo de exec restante > 0, significa que ainda precisa executar
           if(list[i].tempo_restante >= list[i].quantun):
@@ -28,6 +27,7 @@ def run(n, list):
               print('   ' * start, end='')
               for j in range(0, list[i].quantun):
                 sleep(1)
+                # caracter pra representar o estouro de deadline
                 if (list[i].deadline < (start_atual + j +1)):
                     print('|-|', end='', flush=True)
                 else:
@@ -67,10 +67,7 @@ def run(n, list):
       if(list[i].tempo_restante <=0):
         i += 1
     print('\n')
-    print("Processes Burst time " +
-          " Waiting time " +
-          " Turn around time")
-    
+
     turnaround = 0
     for i in range(0, n ):
       turnaround += list[i].turnaround

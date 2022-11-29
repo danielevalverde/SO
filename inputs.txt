@@ -1,9 +1,11 @@
-3
-a 0 4 2 1
-b 2 3 2 2
-c 0 4 2 2
-deadline
+edf
+3 2 1
+a 0 4 1
+b 2 3 2
+c 0 4 2
 turn = 9
+char, tempo_chegada, tempo_execucao, prioridade
+
 
 3
 a 1 4 2 3
