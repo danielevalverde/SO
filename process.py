@@ -3,7 +3,7 @@ from dataclasses import dataclass
 
 @dataclass
 class Process:
-    def __init__(self, char='*', tempo_chegada=0, tempo_execucao=0, deadline=0, quantun=0, sobrecarga=0, pagina=0, tempo_espera=0, turnaround=0):
+    def __init__(self, char='*', tempo_chegada=0, tempo_execucao=0, deadline=0, quantun=0, sobrecarga=0, pagina=0, tempo_espera=0, turnaround=0, prioridade=0):
         self.char = char
         self.tempo_chegada = tempo_chegada
         self.tempo_execucao = tempo_execucao
@@ -14,6 +14,7 @@ class Process:
         self.tempo_espera = tempo_espera
         self.turnaround = turnaround
         self.tempo_restante = tempo_execucao
+        self.prioridade = prioridade
 
 # o Tempo de chegada
 # o Tempo de execução

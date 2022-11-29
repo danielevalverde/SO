@@ -4,6 +4,7 @@ import fifo
 from processor import Processor
 import rr
 import sjf
+import prio
 
 n = int(input())
 
@@ -11,7 +12,7 @@ list_aux = []
 
 for i in range(n):
     aux = Process()
-    aux.char, aux.tempo_chegada, aux.tempo_execucao, aux.quantun = input().split(' ')
+    aux.char, aux.tempo_chegada, aux.tempo_execucao, aux.quantun, aux.prioridade = input().split(' ')
     aux.tempo_restante = aux.tempo_execucao
     list_aux.append(aux)
 
@@ -23,6 +24,7 @@ for i in range(n):
     aux.tempo_execucao = int(list_aux[i].tempo_execucao)
     aux.quantun = int(list_aux[i].quantun)
     aux.tempo_restante = int(list_aux[i].tempo_restante)
+    aux.prioridade = int(list_aux[i].prioridade)
     list.append(aux)
 
 list.sort(key=lambda x: x.tempo_chegada)
@@ -31,7 +33,8 @@ list.sort(key=lambda x: x.tempo_chegada)
 
 # fifo.run(n, list)
 # rr.run(n, list)
-sjf.run(n, list)
+# sjf.run(n, list)
+prio.run(n, list)
 # processor = Processor(delay=0.5)
 # memory = Memory()
 
