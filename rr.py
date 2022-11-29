@@ -8,7 +8,7 @@ def run(n, list):
     start = 0
     m = n
     while(i < n):
-        print(f"start, list[i].tempo_restante, turnaround: {start,  list[i].tempo_restante, turnaround}")
+        start_atual = start
         if(list[i].tempo_restante > 0):
             # se o tempo de exec restante > 0, significa que ainda precisa executar
             if(list[i].tempo_restante >= list[i].quantun):
@@ -34,7 +34,7 @@ def run(n, list):
                     aux.char = list[i].char
                     list.append(aux)
                     n += 1
-                print('   ' * start, end='')
+                print('   ' * start_atual, end='')
                 for j in range(0, list[i].quantun):
                     sleep(1)
                     print('|'+list[i].char + '|', end='', flush=True)
@@ -61,25 +61,9 @@ def run(n, list):
                 print('\n')
                 list[i].tempo_restante = 0
         i += 1
-    print('\n')
-    print("Processes Burst time " +
-          " Waiting time " +
-          " Turn around time")
     
     turnaround = 0
     for i in range(0, n ):
         turnaround += list[i].turnaround
     
-    print("utnr: " + str(turnaround))
-
-
-    for i in range(0, n):
-        print(" " + str(i + 1) + "\t\t" +
-              str(list[i].tempo_execucao) + "\t " +
-              str(list[i].tempo_espera) + "\t\t " +
-              str(list[i].turnaround) + "\t\t ")
-
-    print("Average waiting time = " + str(tempo_espera / m))
     print("Average turn around time = " + str(turnaround / m))
-
-    # print(tempo_espera)

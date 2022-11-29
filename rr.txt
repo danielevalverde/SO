@@ -1,0 +1,7 @@
+roundrobim
+3 2 1
+a 0 4
+b 1 2
+c 0 3
+
+RR: Turnaround = 9,33
