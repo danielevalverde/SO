@@ -24,7 +24,7 @@ for i in range(n):
     aux.tempo_execucao = int(list_aux[i].tempo_execucao)
     aux.quantun = int(list_aux[i].quantun)
     aux.tempo_restante = int(list_aux[i].tempo_restante)
-    aux.prioridade = int(list_aux[i].prioridade)
+    aux.prioridade = int(list_aux[i].prioridade) * (-1)
     list.append(aux)
 
 list.sort(key=lambda x: x.tempo_chegada)
