@@ -29,7 +29,6 @@ for i in range(n):
     aux.tempo_restante = aux.tempo_execucao
     list_aux.append(aux)
 
-
 if(algorithm == "fifo" or algorithm == "sjf" or algorithm == "roundrobim" ):
     list = []
     for i in range(n):
