@@ -2,12 +2,11 @@ from time import sleep
 from process import Process
 
 def run(n, list):
-    list.sort(key=lambda x: (x.deadline, x.tempo_chegada))
+    list.sort(key=lambda x: (x.tempo_chegada, x.deadline))
     tempo_espera = 0
     turnaround = 0
     i = 0
     start = 0
-    m = n
     start_atual = 0
     while(i < n):
       if(list[i].tempo_restante > 0):
@@ -24,7 +23,7 @@ def run(n, list):
                 list[i].tempo_espera = 0
               list[i].tempo_restante = list[i].tempo_restante - list[i].quantun
               list[i].turnaround =  list[i].quantun + list[i].tempo_espera 
-              print('   ' * start, end='')
+              print('   ' * start_atual, end='')
               for j in range(0, list[i].quantun):
                 sleep(1)
                 # caracter pra representar o estouro de deadline
@@ -42,7 +41,7 @@ def run(n, list):
               ################
               # se depois de executar até o tempo do quantun, o processo ainda precisar de mais tempo pra executar, diminui a prioridade e reordena a fila
               if(list[i].tempo_restante > 0):
-                list.sort(key=lambda x: (x.deadline, x.tempo_chegada))
+                list.sort(key=lambda x: (x.tempo_chegada, x.deadline))
                 i = 0
           else:
             # se tiver que esperar desconta o tempo de chegada 
@@ -53,7 +52,7 @@ def run(n, list):
                 list[i].tempo_espera = 0
             start = start + list[i].tempo_restante
             list[i].turnaround =  list[i].tempo_restante + list[i].tempo_espera 
-            print('   ' * start, end='')
+            print('   ' * start_atual, end='')
             for j in range(0, list[i].tempo_restante):
                 sleep(1)
                 if (list[i].deadline < (start_atual + j +1)):
@@ -72,4 +71,4 @@ def run(n, list):
     for i in range(0, n ):
       turnaround += list[i].turnaround
     
-    print("Average turn around time = " + str(turnaround / m))
+    print("Average turn around time = " + str(turnaround / n))
