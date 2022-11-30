@@ -22,14 +22,16 @@
   - 2 é o quantun 
   - 1 é a sobrecarga do sistema
   - a é o caracter que representa o processo no gráfico de gant
-  - o segundo número representa o tempo de chegada
-  - o terceiro número representa o tempo de execução
-  - o quarto número representa a deadline do processo
+  - o primeiro número representa o tempo de chegada
+  - o segundo número representa o tempo de execução
+  - o terceiro número representa a deadline do processo
+  - para o FIFO e o SJF o terceiro número representa a deadline do processo
   
-  #### Para os algoritmos de Fifo e SJF não deve ser informado valor de sobrecarga e valores de prioridade/deadline
+  #### Para os algoritmos de Fifo e SJF deve ser informado a quantidade de páginas e não deve ser informado valor de sobrecarga e valores de prioridade/deadline
   - O algoritmo de Round Robim foi implementado com e sem prioridade.
   - Para executar com prioridade deve ser executado com o comando "make prioridade"
   - Para executar sem prioridade deve ser executado com o comando "make rr"
+  - O algoritmo de troca de páginas de Fifo foi implementado para os algoritmos de escalonamento Fifo e SJF
  
 #### O gráfico de gant é exibido no terminal com a execução de cada processo
   
