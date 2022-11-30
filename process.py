@@ -5,14 +5,14 @@ from memory import Memory
 
 @dataclass
 class Process:
-    def __init__(self, char='*', tempo_chegada=0, tempo_execucao=0, deadline=0, quantun=0, sobrecarga=0, pagina=0, tempo_espera=0, turnaround=0, prioridade=0):
+    def __init__(self, char='*', tempo_chegada=0, tempo_execucao=0, deadline=0, quantun=0, sobrecarga=0, paginas = 0, tempo_espera=0, turnaround=0, prioridade=0):
         self.char = char
         self.tempo_chegada = tempo_chegada
         self.tempo_execucao = tempo_execucao
         self.deadline = deadline
         self.quantun = quantun
         self.sobrecarga = sobrecarga
-        self.pagina = pagina
+        self.paginas = paginas
         self.tempo_espera = tempo_espera
         self.turnaround = turnaround
         self.tempo_restante = tempo_execucao

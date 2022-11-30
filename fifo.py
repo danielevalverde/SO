@@ -29,7 +29,7 @@ def run(n, list):
 		for j in range(0, list[i].tempo_execucao):
 			sleep(1)
 			print('|'+list[i].char + '|', end='', flush=True)
-		print('\n')
+		print('')
 		
 	turnaround = 0
 	for i in range(0, n ):
@@ -37,4 +37,5 @@ def run(n, list):
 
 	print("Average turn around time = "+  str(turnaround / n))
 
+	print('\n')
 	memory.print()

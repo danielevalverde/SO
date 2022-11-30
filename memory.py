@@ -1,4 +1,5 @@
 from dataclasses import dataclass, field
+from time import sleep
 
 """
 Os processos só executam se todas as suas páginas estiverem na RAM
@@ -10,36 +11,42 @@ Opção 1: rodar ele junto com os processos, salvar o progresso em um array e en
 
 @dataclass
 class ProcessPages:
-    def __init__(self, process, pages_in_ram=None):
+    char: str
+    pages: int
+    tempo_execucao: int
+
+    def __init__(self, process):
         self.tempo_execucao = process.tempo_execucao
         self.char = process.char
-        self.pages = process.pagina
-        self.pages_in_ram = self.pages if pages_in_ram is None else pages_in_ram
+        self.pages = process.paginas
 
 @dataclass
 class Memory:
-    algorithm: str
+    algorithm: str = 'fifo'
     max_size: int = 50
     ram_slots: list[ProcessPages] = field(default_factory=list)
     size: int = 0
-
-    def __init__(self, algorithm='fifo'):
-        self.algorithm = algorithm
 
     def alloc(self, process):
         self.ram_slots.append(ProcessPages(process))
 
     def print(self):
+        time = 0
+
+        print("Memory:")
+
         while len(self.ram_slots) > 0:
             pp = self.ram_slots.pop(0)
 
             for i in range(0, pp.tempo_execucao):
-                print(f'|{pp.char}|', end='', flush=True)
-
-            print('\n')
+                sleep(1)
+                print(f'{time}: ', end='', flush=True)
+                print(f'|{pp.char}|'*pp.pages, end='', flush=True)
+                print('| |'*(self.max_size-pp.pages), flush=True)
+                time += 1
 
     def has_space_for(self, process):
-        if (self.size + process.pagina) <= self.max_size:
+        if (self.size + process.paginas) <= self.max_size:
             return True
 
         return False
@@ -53,7 +60,7 @@ class Memory:
         # remove all occurrences
         # self.ram_slots = [p for p in self.ram_slots if p.char != process.char]
 
-        self.size -= process.pagina
+        self.size -= process.paginas
 
     def swap_in(self, process):
         if self.algorithm == 'fifo':
