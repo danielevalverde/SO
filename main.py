@@ -9,7 +9,7 @@ import edf
 
 algorithm = input()
 if(algorithm != "fifo" and algorithm != "sjf" ):
-    n, quantun, sobrecarga, = input().split(' ')
+    n, quantun, sobrecarga = input().split(' ')
     sobrecarga = int(sobrecarga)
 else:
     n, quantun= input().split(' ')
@@ -20,10 +20,12 @@ list_aux = []
 
 for i in range(n):
     aux = Process()
-    if(algorithm == "fifo" or algorithm == "sjf" or algorithm == "roundrobim" ):
+    if(algorithm == "fifo" or algorithm == "sjf"):
+        aux.char, aux.tempo_chegada, aux.tempo_execucao, aux.paginas = input().split(' ')
+    elif algorithm == "roundrobim":
         aux.char, aux.tempo_chegada, aux.tempo_execucao = input().split(' ')
     else:
-        aux.char, aux.tempo_chegada, aux.tempo_execucao, aux.prioridade= input().split(' ')
+        aux.char, aux.tempo_chegada, aux.tempo_execucao, aux.paginas, aux.prioridade= input().split(' ')
         aux.sobrecarga = sobrecarga
     aux.quantun = quantun
     aux.tempo_restante = aux.tempo_execucao
@@ -37,6 +39,7 @@ if(algorithm == "fifo" or algorithm == "sjf" or algorithm == "roundrobim" ):
         aux.tempo_execucao = int(list_aux[i].tempo_execucao)
         aux.quantun = int(list_aux[i].quantun)
         aux.tempo_restante = int(list_aux[i].tempo_restante)
+        aux.paginas = int(list_aux[i].paginas)
         list.append(aux)
     if(algorithm == "fifo" ):
         fifo.run(n, list)

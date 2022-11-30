@@ -1,8 +1,8 @@
 sjf
 3 2
-a 0 4
-b 1 2
-c 0 3
+a 0 4 3
+b 1 2 2
+c 0 3 4
 
 SJF: Turnaround = 6
 
