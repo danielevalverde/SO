@@ -1,5 +1,4 @@
 from dataclasses import dataclass, field
-from process import Process
 
 """
 Os processos só executam se todas as suas páginas estiverem na RAM
@@ -10,34 +9,66 @@ Opção 1: rodar ele junto com os processos, salvar o progresso em um array e en
 """
 
 @dataclass
+class ProcessPages:
+    def __init__(self, process, pages_in_ram=None):
+        self.tempo_execucao = process.tempo_execucao
+        self.char = process.char
+        self.pages = process.pagina
+        self.pages_in_ram = self.pages if pages_in_ram is None else pages_in_ram
+
+@dataclass
 class Memory:
     algorithm: str
     max_size: int = 50
-    slots: list[Process] = field(default_factory=list)
+    ram_slots: list[ProcessPages] = field(default_factory=list)
     size: int = 0
 
-    def has_space_for(self, process: Process):
+    def __init__(self, algorithm='fifo'):
+        self.algorithm = algorithm
+
+    def alloc(self, process):
+        self.ram_slots.append(ProcessPages(process))
+
+    def print(self):
+        while len(self.ram_slots) > 0:
+            pp = self.ram_slots.pop(0)
+
+            for i in range(0, pp.tempo_execucao):
+                print(f'|{pp.char}|', end='', flush=True)
+
+            print('\n')
+
+    def has_space_for(self, process):
         if (self.size + process.pagina) <= self.max_size:
             return True
 
         return False
 
-    def page_in(self, process):
-        self.page_out(process)
-        self.slots.append(process)
+    def swap_out(self, process):
+        for i, o in enumerate(self.ram_slots):
+            if o.char == process.char:
+                del self.ram_slots[i]
+                break
 
-    def page_out(self, process):
+        # remove all occurrences
+        # self.ram_slots = [p for p in self.ram_slots if p.char != process.char]
+
+        self.size -= process.pagina
+
+    def swap_in(self, process):
         if self.algorithm == 'fifo':
             self.fifo(process)
         elif self.algorithm == 'lru':
             self.lru(process)
 
+        # self.ram_slots.append(process)
+
     def fifo(self, process):
         while self.has_space_for(process) is False:
-            self.slots.pop(0)
+            self.ram_slots.pop(0)
 
     def lru(self, process):
-        self.slots.sort(key=lambda x: x.tempo_ultimo_uso)
+        self.ram_slots.sort(key=lambda x: x.tempo_ultimo_uso)
 
         while self.has_space_for(process) is False:
-            self.slots.pop(0)
+            self.ram_slots.pop(0)

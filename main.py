@@ -9,7 +9,7 @@ import edf
 
 algorithm = input()
 if(algorithm != "fifo" and algorithm != "sjf" ):
-    n, quantun, sobrecarga, = input().split(' ')
+    n, quantun, sobrecarga = input().split(' ')
     sobrecarga = int(sobrecarga)
 else:
     n, quantun= input().split(' ')

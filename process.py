@@ -1,5 +1,7 @@
 from dataclasses import dataclass
 
+from memory import Memory
+
 
 @dataclass
 class Process:
@@ -17,9 +19,15 @@ class Process:
         self.prioridade = prioridade
         self.tempo_ultimo_uso = 0
 
-    def run(self):
+    def run(self, memory: Memory):
         # chamar classe ao executar um processo para poder fazer o page_in e guardar o estado de paginação
         # (e possivelmente travar a execução do processo caso não tenha espaço na memória)
+
+        memory.alloc(self)
+        # memory.swap_in(self)
+
+    def finish(self, memory: Memory):
+        # memory.swap_out(self)
         pass
 
 # o Tempo de chegada

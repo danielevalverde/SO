@@ -1,10 +1,15 @@
 from time import sleep
+
+from memory import Memory
 from process import Process
 # https://github.com/danielevalverde/SO/blob/main/fifo.py
+
 
 def run(n, list):
 	list.sort(key=lambda x: x.tempo_chegada)
 	start = 0
+	memory = Memory()
+
 	for i in range(0, n ):
 		# instante em que comeca a executar para o print
 		start_atual = start
@@ -18,6 +23,7 @@ def run(n, list):
 		
 		list[i].turnaround =  list[i].tempo_execucao + list[i].tempo_espera
 
+		memory.alloc(list[i])
 
 		print('   ' * start_atual, end='')
 		for j in range(0, list[i].tempo_execucao):
@@ -30,3 +36,5 @@ def run(n, list):
 		turnaround += list[i].turnaround
 
 	print("Average turn around time = "+  str(turnaround / n))
+
+	memory.print()
