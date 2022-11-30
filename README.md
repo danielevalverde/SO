@@ -34,3 +34,8 @@
 #### O gráfico de gant é exibido no terminal com a execução de cada processo
   
   
+Equipe:
+Daniele Valverde
+Valdinei Oliveira
+Benjamin Anderson
+Rodrigo Rosa
