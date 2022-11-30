@@ -2,13 +2,10 @@ from time import sleep
 from process import Process
 
 def run(n, list):
-    list.sort(key=lambda x: (x.prioridade, x.tempo_chegada))
-    tempo_espera = 0
+    list.sort(key=lambda x: (x.tempo_chegada, x.prioridade))
     turnaround = 0
     i = 0
     start = 0
-    m = n
-    update = True
     while(i < n):
       start_atual = start
       if(list[i].tempo_restante > 0):
@@ -36,24 +33,22 @@ def run(n, list):
                 # string vazia pra representar a sobrecarga
                 print('| |', end='', flush=True)
               print('\n')
-              ################
               # se depois de executar até o tempo do quantun, o processo ainda precisar de mais tempo pra executar, diminui a prioridade e reordena a fila
+              # a prioridade foi add na fila com o sinal trocando, entao diminuir significa somar um numero positivo
               if(list[i].tempo_restante > 0):
-                aux_t = list[i].tempo_restante
                 list[i].prioridade += 1 
-                aux_p = list[i].prioridade
-                list.sort(key=lambda x: (x.prioridade, x.tempo_chegada))
+                list.sort(key=lambda x: (x.tempo_chegada, x.prioridade))
                 i = 0
           else:
             # se tiver que esperar desconta o tempo de chegada 
             if (start - list[i].tempo_chegada > 0):
                 list[i].tempo_espera = start - list[i].tempo_chegada
             # processo chega mas nao precisa esperar
-            elif(tempo_espera - list[i].tempo_chegada < 0):
+            elif(start - list[i].tempo_chegada < 0):
                 list[i].tempo_espera = 0
             start = start + list[i].tempo_restante
             list[i].turnaround =  list[i].tempo_restante + list[i].tempo_espera 
-            print('   ' * start, end='')
+            print('   ' * start_atual, end='')
             for j in range(0, list[i].tempo_restante):
                 sleep(1)
                 print('|'+list[i].char + '|', flush=True)
@@ -62,10 +57,9 @@ def run(n, list):
 
       if(list[i].tempo_restante <=0):
         i += 1
-    print('\n')
     
     turnaround = 0
     for i in range(0, n ):
       turnaround += list[i].turnaround
     
-    print("Average turn around time = " + str(turnaround / m))
+    print("Average turn around time = " + str(turnaround / n))

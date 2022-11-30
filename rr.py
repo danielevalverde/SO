@@ -2,7 +2,7 @@ from time import sleep
 from process import Process
 
 def run(n, list):
-    tempo_espera = 0
+    list.sort(key=lambda x: x.tempo_chegada)
     turnaround = 0
     i = 0
     start = 0
@@ -50,11 +50,11 @@ def run(n, list):
                 if (start - list[i].tempo_chegada > 0):
                     list[i].tempo_espera = start - list[i].tempo_chegada
                 # processo chega mas nao precisa esperar
-                elif(tempo_espera - list[i].tempo_chegada < 0):
+                elif(start - list[i].tempo_chegada < 0):
                     list[i].tempo_espera = 0
                 start = start + list[i].tempo_restante
                 list[i].turnaround =  list[i].tempo_restante + list[i].tempo_espera 
-                print('   ' * start, end='')
+                print('   ' * start_atual, end='')
                 for j in range(0, list[i].tempo_restante):
                     sleep(1)
                     print('|'+list[i].char + '|', flush=True)
