@@ -1,19 +1,36 @@
-# SO
+# Simulador de execução de processos de um sistema operacional
 
-- Round-Robin: adicionar sobrecarga e adicionar testes
-- SJF: corrigir e testar
-- MMU
-  - Tabelas de endereços virtual e real
-- Gerenciamento de Memória
-  - Memória: vetor de 200K/4K = 50 posições para as páginas
-  - Paginação: checar bit e espaço disponível, page-in, page-out
-    - Remover LRU páginas e reorganizar (desfragmentar) memória
-    - O algoritmo remove o conjunto de páginas de cada processo (como nas ilustrações)
-    - TODO: Se por ex, no Round-Robin, um processo for pausado, as páginas dele podem ser substituídas se a memória ficar cheia?
-  - PASSOS:
-    - SE primeira execução:
-      - Verifica espaço na memória. Se tiver, aloca as páginas. Senão, realiza substituição de páginas (de acordo com algoritmo).
-        - Se substituiu todos possíveis e ainda não há espaço suficiente, manter em espera
-          - TODO: adicionar campo para estado do processo
-    - SE outra execução:
-      - Atualiza timestamp do conjunto de páginas do processo
+### Algoritmos de escalonamento implementados:
+  - FIFO
+  - SJF
+  - Round Robim
+  - EDF
+
+### O usuário deve digitar o nome do algoritmo de escalonamento e os dados do processo e do sistema
+  - Existe um comando make para cada algoritmo passando o arquivo com entrada válidas para cada algoritmo.
+  #Exemplo de Entrada: 
+  ```
+  edf
+  3 2 1
+  a 0 4 1
+  b 2 3 2
+  c 0 4 2
+  ```
+  
+  - Onde o algoritmo escolhido foi o edf
+  - 3 é o numero de processos
+  - 2 é o quantun 
+  - 1 é a sobrecarga do sistema
+  - a é o caracter que representa o processo no gráfico de gant
+  - o segundo número representa o tempo de chegada
+  - o terceiro número representa o tempo de execução
+  - o quarto número representa a deadline do processo
+  
+  #### Para os algoritmos de Fifo e SJF não deve ser informado valor de sobrecarga e valores de prioridade/deadline
+  - O algoritmo de Round Robim foi implementado com e sem prioridade.
+  - Para executar com prioridade deve ser executado com o comando "make prioridade"
+  - Para executar sem prioridade deve ser executado com o comando "make rr"
+ 
+#### O gráfico de gant é exibido no terminal com a execução de cada processo
+  
+  
