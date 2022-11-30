@@ -25,7 +25,7 @@ for i in range(n):
     elif algorithm == "roundrobim":
         aux.char, aux.tempo_chegada, aux.tempo_execucao = input().split(' ')
     else:
-        aux.char, aux.tempo_chegada, aux.tempo_execucao, aux.paginas, aux.prioridade= input().split(' ')
+        aux.char, aux.tempo_chegada, aux.tempo_execucao, aux.prioridade= input().split(' ')
         aux.sobrecarga = sobrecarga
     aux.quantun = quantun
     aux.tempo_restante = aux.tempo_execucao

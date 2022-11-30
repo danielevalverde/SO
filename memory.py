@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
 from time import sleep
+from typing import Any
 
 """
 Os processos só executam se todas as suas páginas estiverem na RAM
@@ -24,7 +25,7 @@ class ProcessPages:
 class Memory:
     algorithm: str = 'fifo'
     max_size: int = 50
-    ram_slots: list[ProcessPages] = field(default_factory=list)
+    ram_slots: Any  = field(default_factory=list)
     size: int = 0
 
     def alloc(self, process):
