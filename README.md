@@ -39,6 +39,4 @@
 Equipe:
 Daniele Valverde
 Valdinei Oliveira
-Benjamin Anderson
-Rodrigo Rosa
 ```
